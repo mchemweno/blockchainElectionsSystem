@@ -1,7 +1,7 @@
 import {toast, Toaster} from "react-hot-toast";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import styles from "./signup.module.css";
-import Button from "../../UI/Button/Button";
+import Button from "../../ui/Button/Button";
 import * as Yup from "yup";
 
 

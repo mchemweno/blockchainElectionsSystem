@@ -2,7 +2,7 @@ import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {toast, Toaster} from "react-hot-toast";
 import styles from './Login.module.css'
-import Button from "../../UI/Button/Button";
+import Button from "../../ui/Button/Button";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {login} from "../../store/actions/user";

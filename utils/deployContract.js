@@ -1,9 +1,9 @@
 import Web3 from "web3";
-import {abi, binary, myEther} from "../constants";
+import {abi, binary, myEther, web3} from "../constants";
 
 
 const deployContract = async (constructorArguments) => {
-    const web3 = new Web3("http://localhost:7545");
+
     const contract = await new web3.eth.Contract(
         abi,
     ).deploy({

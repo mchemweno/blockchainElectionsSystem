@@ -36,8 +36,8 @@ contract Elections {
         }
     }
 
-    function vote(uint proposal) external {
-        Voter storage sender = voters[msg.sender];
+    function vote(uint proposal, address voterIdentity) external {
+        Voter storage sender = voters[voterIdentity];
         require(sender.weight != 0, "Has no right to vote");
         require(!sender.voted, "Already voted");
         sender.voted = true;

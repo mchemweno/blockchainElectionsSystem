@@ -31,7 +31,7 @@ const Login = ({toggleLoginModeHandler}) => {
 
             const credentials = {email, password}
 
-            dispatch(login(credentials))
+            await dispatch(login(credentials))
             submitProps.resetForm();
             submitProps.setSubmitting(false);
             toast.dismiss();

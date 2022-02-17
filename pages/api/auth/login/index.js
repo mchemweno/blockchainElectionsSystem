@@ -34,13 +34,13 @@ export default nextConnect()
             res.status(201).json({
                 token,
                 user: {
-                    // eslint-disable-next-line no-underscore-dangle
                     id: user._id,
                     email: user.email,
                     username: user.username,
                     firstName: user.firstName,
                     lastName: user.lastName,
-                    phoneNumber: user.phoneNumber
+                    phoneNumber: user.phoneNumber,
+                    admin: user.admin
                 },
             })
         } catch (error) {

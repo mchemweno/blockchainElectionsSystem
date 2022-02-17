@@ -9,16 +9,17 @@ const ElectionSchema = new Schema(
             unique: true,
             required: true,
         },
-        participants: {
-            type: [String],
-        },
         voters: {
             type: [String],
         },
         winner: {
             type: String,
         },
-        totalVotes: {
+        contractAddress: {
+            type: String,
+            required: true
+        },
+        winnerTotalVotes: {
             type: Number
         }
     },

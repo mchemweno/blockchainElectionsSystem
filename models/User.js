@@ -38,7 +38,11 @@ const UserSchema = new Schema(
         phoneNumber: {
             type: Number,
             required: true
-        }
+        },
+        active: {
+            type: Boolean,
+            default: false
+        },
     },
     {timestamps: true}
 );

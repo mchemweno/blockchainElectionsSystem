@@ -1,10 +1,13 @@
 import {useSelector} from "react-redux";
+import Layout from "../../components/layout/Layout";
 
 
 const Votes = () => {
     const user = useSelector(state => state.user)
     return (
-        <p>{user.email} {user.id}</p>
+        <Layout>
+            <p>{user.email} {user.id}</p>
+        </Layout>
     )
 }
 

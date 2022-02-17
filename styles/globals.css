@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body {
+  height: 100vh;
   @apply font-sans;
 }
 img {
@@ -20,6 +21,5 @@ h2 {
 
 p {
   @apply text-base my-3 md:my-4 md:text-base lg:text-lg 2xl:text-2xl;
-  /*color: #6B7185;*/
   color: #686e82;
 }

@@ -1,6 +1,6 @@
 export const AUTO_LOGIN = 'AUTO_LOGIN'
 export const LOGIN = 'LOGIN'
-export const LOGOUT ='LOGOUT'
+export const LOGOUT = 'LOGOUT'
 
 export const login = (credentials) => {
     return async (dispatch) => {
@@ -16,11 +16,11 @@ export const login = (credentials) => {
                 }
             )
 
-            const resData = await response.json();
-
             if (response.status === 401) {
                 throw new Error(response.statusText);
             }
+
+            const resData = await response.json();
 
 
             localStorage.setItem(

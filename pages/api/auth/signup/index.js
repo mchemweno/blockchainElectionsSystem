@@ -25,13 +25,14 @@ export default async (req, res) => {
         salt,
         firstName,
         lastName,
-        phoneNumber
+        phoneNumber,
+        active: true
     })
 
     try {
-        const userEmailExists = await User.findOne({email})
-        const userUsernameExists = await User.findOne({username})
-        const phoneNumberExists = await User.findOne({phoneNumber})
+        const userEmailExists = await User.findOne({email, active: true})
+        const userUsernameExists = await User.findOne({username, active: true})
+        const phoneNumberExists = await User.findOne({phoneNumber, active: true})
 
         if (userUsernameExists) {
             if (userUsernameExists.email !== email) {

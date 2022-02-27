@@ -19,31 +19,9 @@ const ElectionSchema = new Schema(
                 }
             }],
         },
-        winner: {
-            type: String,
-        },
         contractAddress: {
             type: String,
             required: true
-        },
-        winnerTotalVotes: {
-            type: Number
-        },
-        aspirants: {
-            type: [{
-                email: {
-                    type: String,
-                    required: true,
-                    unique: false
-                },
-                votes: {
-                    type: Number,
-                    required: true,
-                    unique: false,
-                    default: 0
-
-                }
-            }],
         },
         year: {
             type: Number

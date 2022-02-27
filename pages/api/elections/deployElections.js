@@ -26,7 +26,6 @@ export default async function handler(req, res) {
     const election = new Election({
         year,
         post,
-        aspirants: aspirants,
     })
 
 
@@ -45,7 +44,7 @@ export default async function handler(req, res) {
                 address = await web3.eth.personal.newAccount('test')
                 await web3.eth.personal.unlockAccount(address, 'test', 30000000000000000000000)
                 await contract.methods.addVoter(address, web3.utils.toHex(voter.email)).send({
-                    from: accounts[9]
+                    from: accounts[4]
                 })
                 processedVoters.push({...voter, address})
             }

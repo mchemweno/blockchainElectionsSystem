@@ -36,6 +36,20 @@ contract Elections {
         }
     }
 
+    function getAllProposals() public view
+    returns (bytes32[] memory, uint[] memory)
+    {
+        bytes32[] memory _names = new bytes32[](proposals.length);
+        uint[] memory _votes = new uint[](proposals.length);
+
+        for (uint i = 0; i < proposals.length; i++) {
+            _names[i] = proposals[i].name;
+            _votes[i] = proposals[i].voteCount;
+        }
+
+        return (_names, _votes);
+    }
+
     function vote(uint proposal, address voterIdentity) external {
         Voter storage sender = voters[voterIdentity];
         require(sender.weight != 0, "Has no right to vote");
@@ -47,7 +61,7 @@ contract Elections {
     }
 
     function winningProposals() public view
-    returns (uint winningProposal_, bytes32 winningName_)
+    returns (uint winningVoteCount_, bytes32 winningName_)
     {
         uint winningVoteCount = 0;
         bytes32 winningName;
@@ -55,7 +69,7 @@ contract Elections {
             if (proposals[p].voteCount > winningVoteCount) {
                 winningVoteCount = proposals[p].voteCount;
                 winningName = proposals[p].name;
-                winningProposal_ = p;
+                winningVoteCount_ = proposals[p].voteCount;
                 winningName_ = winningName;
             }
         }
@@ -82,7 +96,7 @@ contract Elections {
         weight : 1,
         email : incomingVoter
         });
-        voters.push(voterEnroll) - 1;
+//        voters.push(voterEnroll) - 1;
     }
 
     function getAllVoters(address voterAdr) public view

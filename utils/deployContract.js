@@ -12,8 +12,8 @@ const deployContract = async (constructorArguments) => {
         })
             .send({
                 from: myEther,
-                gasPrice: '20000000000',
-                gas: 900000
+                gasPrice: '2',
+                gas: 1000000
             })
 
         return contract

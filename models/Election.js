@@ -4,13 +4,20 @@ const Schema = mongoose.Schema;
 
 const ElectionSchema = new Schema(
     {
-        name: {
-            type: String,
-            unique: true,
-            required: true,
-        },
         voters: {
-            type: [String],
+            type: [{
+                email: {
+                    type: String,
+                    required: true,
+                    unique: false
+                },
+                address: {
+                    type: String,
+                    required: true,
+                    unique: false
+
+                }
+            }],
         },
         winner: {
             type: String,
@@ -21,6 +28,33 @@ const ElectionSchema = new Schema(
         },
         winnerTotalVotes: {
             type: Number
+        },
+        aspirants: {
+            type: [{
+                email: {
+                    type: String,
+                    required: true,
+                    unique: false
+                },
+                votes: {
+                    type: Number,
+                    required: true,
+                    unique: false,
+                    default: 0
+
+                }
+            }],
+        },
+        year: {
+            type: Number
+        },
+        post: {
+            type: String,
+            required: true
+        },
+        completed: {
+            type: Boolean,
+            default: false
         }
     },
     {timestamps: true}

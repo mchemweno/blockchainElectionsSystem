@@ -54,7 +54,7 @@ export default async (req, res) => {
             throw err
         }
 
-        user.save()
+        await user.save()
         return res.status(201).json({message: 'User created!.', user})
     } catch (err) {
         if (!err.status) {

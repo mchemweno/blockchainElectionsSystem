@@ -8,7 +8,7 @@ export default async function handler(req, res) {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
 
-    const {address, proposal} = req.body
+    const {address, proposal, userAddress} = req.body
 
     if (!address || !proposal) return res.status(405).end(`Please fill in all the fields`)
 
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
         const accounts = await web3.eth.getAccounts();
         const contract = await getContract(address)
 
-        await contract.methods.vote(proposal, user.address).send({
+        await contract.methods.vote(proposal, userAddress).send({
             from: accounts[4]
         })
     } catch (e) {

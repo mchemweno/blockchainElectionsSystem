@@ -92,7 +92,7 @@ contract Elections {
     {
         voters[voterEnroll] = Voter({
         voted : false,
-        vote : 1,
+        vote : 1000,
         weight : 1,
         email : incomingVoter
         });

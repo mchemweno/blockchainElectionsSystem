@@ -1,5 +1,5 @@
 .btn {
-    @apply bg-gradient-to-r from-blue-300 to-green-300 py-3 px-12 text-white mt-3 rounded;
+    @apply bg-gradient-to-r from-blue-300 to-green-300 py-3 px-5 text-white mt-3 rounded;
     @apply transition duration-150 ease-linear shadow-2xl hover:scale-105 transform;
     box-shadow: 0 0.5rem 1.3rem #93c5fd;
 }

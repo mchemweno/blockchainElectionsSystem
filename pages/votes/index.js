@@ -110,7 +110,7 @@ const Votes = () => {
                     </div>
                 </div>
             </div>}
-            {electionDetails && <ElectionDetails electionDetails={electionDetails} setElectionDetails={setElectionDetails} setVoteEvent={setVoteEvent}/>}
+            {electionDetails && <ElectionDetails electionDetails={electionDetails} user={user} setVoteEvent={setVoteEvent}/>}
         </Layout>
     )
 }

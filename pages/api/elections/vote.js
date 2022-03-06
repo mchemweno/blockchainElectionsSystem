@@ -1,6 +1,7 @@
 import getContract from "../../../utils/getContract";
 import {web3} from "../../../constants";
 import convertProposalsResponseToJson from "../../../utils/convertProposalsResponseToJson";
+import Election from "../../../models/Election";
 
 
 export default async function handler(req, res) {
@@ -9,14 +10,20 @@ export default async function handler(req, res) {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
 
-    const {address, proposal, userAddress} = req.body
+    const {proposal, userEmail, electionId} = req.body
 
-    if (!address || !proposal) return res.status(405).end(`Please fill in all the fields`)
+    if (!userEmail || !proposal || !electionId) return res.status(405).end(`Please fill in all the fields`)
 
     try {
+        const election = await Election.findById(electionId)
+
+        if (!election) throw new Error('Elections doesnt exist')
+
         try {
             const accounts = await web3.eth.getAccounts();
-            const contract = await getContract(address)
+            const contract = await getContract(election.contractAddress)
+
+            const userAddress = election.voters.find(voter => voter.email === userEmail).address
 
             const voterDetails = await contract.methods.getAllVoters(userAddress).call({
                 from: accounts[4]

@@ -1,0 +1,43 @@
+.Container {
+    height: 99vh;
+    padding: 2rem;
+}
+
+.AspirantsContainer {
+    height: 12rem;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding-top: .5rem;
+    padding-left: 1rem;
+    border-radius: .4rem;
+    background-color: rgb(255,255,255);
+    @apply w-1/2
+}
+
+.AspirantsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.VotersContainer {
+    height: 21rem;
+    padding-top: .5rem;
+    padding-left: 1rem;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    border-radius: .4rem;
+    background-color: rgb(255,255,255);
+    @apply w-3/4
+}
+
+.VotersContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.StatusWinner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @apply w-2/3
+}

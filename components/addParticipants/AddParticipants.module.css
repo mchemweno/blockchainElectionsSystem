@@ -1,0 +1,117 @@
+.Container {
+    border: 1px solid #686e82;
+    border-radius: 1rem;
+    @apply w-3/4 h-3/4;
+    padding: 2rem;
+    background-color: rgb(255,255,255);
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+}
+
+.FormControl {
+    width: 40rem;
+    height: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    align-self: center;
+    @apply text-base my-2;
+}
+
+.FormControl input {
+    width: 100%;
+    height: 100%;
+    color: #243c63;
+    outline: none;
+    @apply pt-4;
+    border: none;
+    @apply text-base;
+}
+
+.Label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #686e82;
+    pointer-events: none;
+    border-bottom: 2px solid #686e82;
+    @apply text-base;
+}
+
+.Label::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-bottom: 3px solid #243c63;
+    left: 0;
+    bottom: -0.0625rem;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+}
+
+.ContentLabel {
+    position: absolute;
+    bottom: 0.3125rem;
+    left: 0;
+    transition: all 0.5s ease;
+    @apply text-base;
+}
+
+.FormControl input:focus + .Label .ContentLabel,
+.FormControl input:valid + .Label .ContentLabel {
+    transform: translateY(-100%);
+    color: #243c63;
+    font-size: 0.875rem;
+}
+
+.FormControl input:focus + .Label::after,
+.FormControl input:valid + .Label::after {
+    transform: translateX(0);
+}
+
+.InputErrorDiv {
+    @apply text-red-500;
+    /*border: 1px solid black;*/
+}
+
+.ParticipantContainer {
+    color: white;
+    background-color: #243c63;
+    width: 24rem;
+    border-radius: 0.2rem;
+    border: 1px solid black;
+    margin: 1rem 0;
+}
+
+.ParticipantContainer p {
+    color: white;
+    margin: 0.2rem 0.2rem;
+    text-align: center;
+}
+
+.ParticipantContainer p:hover {
+    color: white;
+    margin: 0.3rem 0.3rem;
+    text-align: center;
+}
+
+.Button {
+    width: 40rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.participantsContainer {
+    height: 24rem;
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    padding-left: .5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}

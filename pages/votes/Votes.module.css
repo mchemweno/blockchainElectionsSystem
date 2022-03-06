@@ -1,0 +1,119 @@
+.selectorContainer {
+    width: 300px;
+    margin: 1rem;
+}
+
+.radioContainer {
+    font-size: 1rem;
+    position: relative;
+    height: 3em;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.radioContainer:hover {
+    z-index: 9999;
+}
+
+.radioOptions {
+    position: absolute;
+    max-height: 3em;
+    width: 100%;
+    transition: 0.7s;
+    text-align: center;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.radioOptions .toggle {
+    position: relative;
+    cursor: pointer;
+    padding: 0.85em;
+    background: #243c63;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+.radioOptions ul {
+    margin: 18px 0 0 0;
+    padding: 0;
+    transition: 0.5s;
+}
+
+.radioOptions li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+}
+
+.radioOptions label {
+    display: block;
+    opacity: 0;
+    padding: 0.85em 0;
+}
+
+.radioOptions input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+.radioOptions input:checked ~ label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    z-index: 2;
+    padding: 0.85em 0;
+    background: #203659;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.radioOptions:hover {
+    max-height: 100em;
+}
+
+.radioOptions:hover ul {
+    position: relative;
+    margin-top: 10px;
+}
+
+.radioOptions:hover ul:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: -10px;
+    right: 2.5em;
+    border-style: solid;
+    border-width: 0 10px 10px 10px;
+    border-color: transparent transparent #203659 transparent;
+}
+
+.radioOptions:hover li {
+    position: relative;
+}
+
+.radioOptions:hover label {
+    opacity: 1;
+    transition: 0.5s;
+    background: #203659;
+    padding: 0.85em 0;
+    cursor: pointer;
+}
+
+.radioOptions:hover label:hover {
+    background: #4371bb ;
+}
+
+.radioOptions:hover input:checked ~ label {
+    position: static;
+    border-radius: 0;
+}

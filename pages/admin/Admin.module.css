@@ -1,0 +1,43 @@
+.Button {
+    margin: 1rem;
+    width: inherit;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 90vh;
+    overflow-y: auto;
+}
+
+.ElectionContainer {
+    height: 17rem;
+    margin: 1rem 0;
+    border-radius: .5rem;
+    padding-left: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding-bottom: 1rem;
+    cursor: pointer;
+}
+
+.AspirantsContainer {
+    height: 7rem;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.AspirantsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.ElectionContainer:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: rgb(245,245,245);
+}
+
+.ElectionContainer:active {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: rgb(245,245,245);
+}

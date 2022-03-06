@@ -1,0 +1,20 @@
+.Container {
+    border: 1px solid #686e82;
+    border-radius: 1rem;
+    @apply w-3/4 h-4/5;
+    padding: 2rem;
+    background-color: rgb(255,255,255);
+}
+
+.participantsContainer {
+    justify-content: center;
+    background-color: aliceblue;
+    padding-top: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 1rem;
+    overflow-y: auto;
+    height: 16rem;
+    width: 54rem;
+    margin-bottom: 1rem;
+}

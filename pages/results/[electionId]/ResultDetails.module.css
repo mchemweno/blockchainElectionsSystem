@@ -1,0 +1,30 @@
+.Container {
+    height: 99vh;
+    padding: 2rem;
+}
+
+.AspirantsContainer {
+    height: 62vh;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding-top: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: .4rem;
+    background-color: rgb(255,255,255);
+    @apply w-3/4
+}
+
+.AspirantsContainer::-webkit-scrollbar {
+    display: none;
+}
+.AspirantContainer {
+    border-bottom: 1px solid #b8bbc6;
+}
+.StatusWinner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    @apply w-2/3
+}

@@ -164,7 +164,7 @@ const SignUp = ({toggleLoginModeHandler}) => {
                                 />
                                 <label htmlFor="number" className={styles.Label}>
                           <span className={styles.ContentLabel}>
-                            Username
+                            Phone Number
                           </span>
                                 </label>
                             </div>

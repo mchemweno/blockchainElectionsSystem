@@ -7,11 +7,13 @@ import AddVoters from "../../../components/addVoters/AddVoters";
 import Summary from "../../../components/summary/Summary";
 import {toast, Toaster} from "react-hot-toast";
 import {useRouter} from "next/router";
+import {useSelector} from "react-redux";
 
 
 const Index = () => {
     const router = useRouter();
-    const pposts = ['President', 'Department President']
+    const user = useSelector(state => state.user)
+    const pposts = ['President', 'IT Representative', 'Sports Representative']
     const [electionDetails, setElectionDetails] = useState({
         'election name': '',
         year: '',
@@ -35,6 +37,7 @@ const Index = () => {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         voters,

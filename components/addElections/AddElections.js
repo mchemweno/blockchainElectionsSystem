@@ -3,10 +3,11 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import Button from "../../ui/Button/Button";
 import * as Yup from "yup";
 import {toast, Toaster} from "react-hot-toast";
-import {login} from "../../store/actions/user";
+import {useSelector} from "react-redux";
 
 const AddElections = ({setVisibility, electionDetails, setElectionDetails, pposts}) => {
     const initialValues = electionDetails;
+    const user = useSelector(state => state.user)
 
     const validationSchema = Yup.object({
         year: Yup.number().integer().required().min(2022).max(2027),
@@ -24,6 +25,7 @@ const AddElections = ({setVisibility, electionDetails, setElectionDetails, ppost
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         post: post,

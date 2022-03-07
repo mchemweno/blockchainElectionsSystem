@@ -3,12 +3,16 @@ import {web3} from "../../../constants";
 import User from "../../../models/User";
 import Election from "../../../models/Election";
 import dbConnect from "../../../utils/dbConnect";
+import middlewareHandler from "../../../utils/middlewareHandler";
+import isAuth from "../../../utils/authUtils/isAuth";
 
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
+
+    await middlewareHandler(req, res, isAuth);
 
     await dbConnect()
 

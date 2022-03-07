@@ -23,9 +23,10 @@ const Admin = () => {
         setLoading(true)
         try {
             const response = await fetch(
-                'http://localhost:3000/api/elections/getAllElections',
+                'http://127.0.0.1:3000/api/elections/getAllElections',
                 {
-                    method: 'GET'
+                    method: 'GET',
+                    headers:{Authorization: `Bearer ${user.token}`}
                 }
             )
             if (response.status !== 200) throw new Error('Something went wrong')

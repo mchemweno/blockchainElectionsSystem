@@ -31,10 +31,10 @@ const Votes = () => {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
+                            Authorization: `Bearer ${user.token}`
                         },
                         body: JSON.stringify({
                             id: election._id,
-                            email: user.email
                         })
                     }
                 )
@@ -63,6 +63,7 @@ const Votes = () => {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         email: user.email

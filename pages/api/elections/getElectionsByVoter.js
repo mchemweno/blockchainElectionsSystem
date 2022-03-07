@@ -4,13 +4,18 @@ import getContract from "../../../utils/getContract";
 import {web3} from "../../../constants";
 import dbConnect from "../../../utils/dbConnect";
 import User from "../../../models/User";
+import middlewareHandler from "../../../utils/middlewareHandler";
+import isAuth from "../../../utils/authUtils/isAuth";
 
 export default async function handler(req, res) {
 
     if (req.method !== 'POST') {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
+
+    const {user} = await middlewareHandler(req, res, isAuth);
     await dbConnect()
+
 
     const elections = await Election.find()
 
@@ -71,7 +76,7 @@ export default async function handler(req, res) {
 
 
 
-        res.status(200).json(processedElections.filter(processedElection => processedElection.voters.find(processedElection => processedElection.email === req.body.email) && !processedElection.completed))
+        res.status(200).json(processedElections.filter(processedElection => processedElection.voters.find(processedElection => processedElection.email === user.email) && !processedElection.completed))
     } catch (e) {
         res.status(500).json({message: e.message})
     }

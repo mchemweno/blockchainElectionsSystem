@@ -27,6 +27,7 @@ const ElectionsDetail = () => {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         id: electionId

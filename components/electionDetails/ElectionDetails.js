@@ -2,8 +2,10 @@ import styles from './ElectionDetails.module.css'
 import {useState} from "react";
 import Button from "../../ui/Button/Button";
 import {toast} from "react-hot-toast";
+import {useSelector} from "react-redux";
 
-const ElectionDetails = ({electionDetails, setVoteEvent, user}) => {
+const ElectionDetails = ({electionDetails, setVoteEvent}) => {
+    const user = useSelector(state => state.user)
 
     const [aspirant, setAspirant] = useState()
     const [loading, setLoading] = useState(false)
@@ -28,10 +30,10 @@ const ElectionDetails = ({electionDetails, setVoteEvent, user}) => {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         proposal: aspirant.email,
-                        userEmail: user.email,
                         electionId: electionDetails._id
                     })
                 }

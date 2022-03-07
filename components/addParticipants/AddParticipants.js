@@ -2,10 +2,11 @@ import styles from './AddParticipants.module.css'
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import Button from "../../ui/Button/Button";
 import * as Yup from "yup";
-import {useState} from "react";
 import {toast, Toaster} from "react-hot-toast";
+import {useSelector} from "react-redux";
 
 const AddParticipants = ({setVisibility, participants, setParticipants}) => {
+    const user = useSelector(state => state.user)
 
     const initialValues = {
         email: ''
@@ -24,6 +25,7 @@ const AddParticipants = ({setVisibility, participants, setParticipants}) => {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({email: email}),
                 }

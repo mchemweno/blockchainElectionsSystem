@@ -3,9 +3,11 @@ import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {toast, Toaster} from "react-hot-toast";
 import styles from './ResultDetails.module.css'
+import {useSelector} from "react-redux";
 
 
 const ResultsDetail = () => {
+    const user = useSelector(state => state.user)
     const router = useRouter();
     const [election, setElection] = useState(null)
     const {electionId} = router.query
@@ -20,6 +22,7 @@ const ResultsDetail = () => {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         id: electionId

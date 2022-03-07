@@ -4,11 +4,15 @@ import convertProposalsResponseToJson from "../../../utils/convertProposalsRespo
 import {web3} from "../../../constants";
 import dbConnect from "../../../utils/dbConnect";
 import User from "../../../models/User";
+import middlewareHandler from "../../../utils/middlewareHandler";
+import isAuth from "../../../utils/authUtils/isAuth";
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
+
+    const {user} =await middlewareHandler(req, res, isAuth);
 
     await dbConnect()
     const election = await Election.findById(req.body.id)
@@ -26,20 +30,20 @@ export default async function handler(req, res) {
 
         const processedProposals = convertProposalsResponseToJson(resProposals[0], resProposals[1])
 
-        const voterSingle = election.voters.find(voter => voter.email === req.body.email)
+        const voterSingle = election.voters.find(voter => voter.email === user.email)
 
         const voterDetails = await contract.methods.getAllVoters(voterSingle.address).call({
             from: accounts[4]
         })
 
-        let user
+        let user1
         const processedAspirants = []
         for (const processedProposal of processedProposals) {
-            user = await User.findOne({email: processedProposal.email})
+            user1 = await User.findOne({email: processedProposal.email})
             processedAspirants.push(
                 {
-                    firstName: user.firstName,
-                    lastName: user.lastName,
+                    firstName: user1.firstName,
+                    lastName: user1.lastName,
                     email: processedProposal.email
                 }
             )

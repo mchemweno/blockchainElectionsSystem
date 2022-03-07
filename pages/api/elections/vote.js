@@ -2,6 +2,8 @@ import getContract from "../../../utils/getContract";
 import {web3} from "../../../constants";
 import convertProposalsResponseToJson from "../../../utils/convertProposalsResponseToJson";
 import Election from "../../../models/Election";
+import middlewareHandler from "../../../utils/middlewareHandler";
+import isAuth from "../../../utils/authUtils/isAuth";
 
 
 export default async function handler(req, res) {
@@ -9,10 +11,11 @@ export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
+    const {user} = await middlewareHandler(req, res, isAuth);
 
-    const {proposal, userEmail, electionId} = req.body
+    const {proposal, electionId} = req.body
 
-    if (!userEmail || !proposal || !electionId) return res.status(405).end(`Please fill in all the fields`)
+    if (!proposal || !electionId) return res.status(405).end(`Please fill in all the fields`)
 
     try {
         const election = await Election.findById(electionId)
@@ -23,7 +26,7 @@ export default async function handler(req, res) {
             const accounts = await web3.eth.getAccounts();
             const contract = await getContract(election.contractAddress)
 
-            const userAddress = election.voters.find(voter => voter.email === userEmail).address
+            const userAddress = election.voters.find(voter => voter.email === user.email).address
 
             const voterDetails = await contract.methods.getAllVoters(userAddress).call({
                 from: accounts[4]

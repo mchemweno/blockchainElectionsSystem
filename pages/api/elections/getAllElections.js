@@ -3,12 +3,16 @@ import convertProposalsResponseToJson from "../../../utils/convertProposalsRespo
 import getContract from "../../../utils/getContract";
 import {web3} from "../../../constants";
 import dbConnect from "../../../utils/dbConnect";
+import middlewareHandler from "../../../utils/middlewareHandler";
+import isAuth from "../../../utils/authUtils/isAuth";
 
 export default async function handler(req, res) {
 
     if (req.method !== 'GET') {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
+
+    await middlewareHandler(req, res, isAuth);
     await dbConnect()
 
     const elections = await Election.find()

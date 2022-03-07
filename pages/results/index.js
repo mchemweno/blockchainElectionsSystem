@@ -11,12 +11,6 @@ const Results = () => {
     const [elections, setElections] = useState(null)
     const [loading, setLoading] = useState(false)
 
-    useEffect(() => {
-        if (!user.admin) {
-            router.replace('/votes')
-        }
-    }, [])
-
     useEffect(async () => {
         toast.loading('Fetching elections....')
         setLoading(true)
@@ -27,6 +21,7 @@ const Results = () => {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',
+                        Authorization: `Bearer ${user.token}`
                     },
                     body: JSON.stringify({
                         email: user.email

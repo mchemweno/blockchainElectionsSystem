@@ -28,7 +28,7 @@ export default nextConnect()
                 },
                 process.env.SECRET,
                 {
-                    expiresIn: '30d',
+                    expiresIn: '50d',
                 },
             )
             res.status(201).json({

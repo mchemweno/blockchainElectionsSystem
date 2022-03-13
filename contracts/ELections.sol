@@ -21,12 +21,19 @@ contract Elections {
 
     address public chairperson;
 
+    bool completed;
+    uint endTime;
+    uint timeLeft;
     mapping(address => Voter) public voters;
 
     Proposal[] public proposals;
 
-    constructor(bytes32[] memory proposalNames) {
+    constructor(bytes32[] memory proposalNames, uint duration) {
         chairperson = msg.sender;
+        endTime = block.timestamp + duration;
+        completed = false;
+        timeLeft = 0;
+
 
         for (uint i = 0; i < proposalNames.length; i++) {
             proposals.push(Proposal({
@@ -37,7 +44,7 @@ contract Elections {
     }
 
     function getAllProposals() public view
-    returns (bytes32[] memory, uint[] memory)
+    returns (bytes32[] memory, uint[] memory, bool, uint)
     {
         bytes32[] memory _names = new bytes32[](proposals.length);
         uint[] memory _votes = new uint[](proposals.length);
@@ -47,12 +54,22 @@ contract Elections {
             _votes[i] = proposals[i].voteCount;
         }
 
-        return (_names, _votes);
+        return (_names, _votes, completed, timeLeft);
+    }
+
+    function updateTime() external {
+        if (block.timestamp < endTime) {
+            timeLeft = endTime - block.timestamp;
+        } else {
+            completed = true;
+            timeLeft = 0;
+        }
     }
 
     function vote(uint proposal, address voterIdentity) external {
         Voter storage sender = voters[voterIdentity];
         require(sender.weight != 0, "Has no right to vote");
+        require(block.timestamp <= endTime, "Elections Ended Cannot Vote.");
         require(!sender.voted, "Already voted");
         sender.voted = true;
         sender.vote = proposal;
@@ -96,7 +113,7 @@ contract Elections {
         weight : 1,
         email : incomingVoter
         });
-//        voters.push(voterEnroll) - 1;
+        //        voters.push(voterEnroll) - 1;
     }
 
     function getAllVoters(address voterAdr) public view

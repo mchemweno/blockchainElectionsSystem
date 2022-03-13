@@ -1,5 +1,5 @@
 import getContract from "../../../utils/getContract";
-import {web3} from "../../../constants";
+import {accountIndex, web3} from "../../../constants";
 import convertProposalsResponseToJson from "../../../utils/convertProposalsResponseToJson";
 import Election from "../../../models/Election";
 import middlewareHandler from "../../../utils/middlewareHandler";
@@ -27,15 +27,16 @@ export default async function handler(req, res) {
             const contract = await getContract(election.contractAddress)
 
             const userAddress = election.voters.find(voter => voter.email === user.email).address
+            console.log(userAddress)
 
             const voterDetails = await contract.methods.getAllVoters(userAddress).call({
-                from: accounts[4]
+                from: accounts[accountIndex]
             })
 
             if (voterDetails['voted__']) throw new Error('You have already voted');
 
             const res = await contract.methods.getAllProposals().call({
-                from: accounts[4]
+                from: accounts[accountIndex]
             })
 
             const proposals = convertProposalsResponseToJson(res[0], res[1])
@@ -44,7 +45,7 @@ export default async function handler(req, res) {
             if (proposalInt < 0) throw new Error('No aspirant by that email')
 
             await contract.methods.vote(proposalInt, userAddress).send({
-                from: accounts[4]
+                from: accounts[accountIndex]
             })
         } catch (e) {
             throw new Error(e.message)

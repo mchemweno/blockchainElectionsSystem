@@ -29,10 +29,6 @@ const ElectionSchema = new Schema(
         post: {
             type: String,
             required: true
-        },
-        completed: {
-            type: Boolean,
-            default: false
         }
     },
     {timestamps: true}

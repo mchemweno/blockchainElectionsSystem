@@ -66,7 +66,10 @@ const ElectionsDetail = () => {
                             <p><strong>Total Voters:</strong> {election.voters.length}</p>
                             <p><strong>Turnout:</strong> {(election.voted / election.voters.length * 100)}%</p>
                         </div>
-                        <p><strong>Total Voted:</strong> {election.voted}</p>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}} className={'w-2/3'}>
+                            <p><strong>Total Voted:</strong> {election.voted}</p>
+                            <p><strong>Time left:</strong> {election.timeLeft}</p>
+                        </div>
                     </div>
                     <h1>Aspirants:</h1>
                     <div className={styles.AspirantsContainer}>

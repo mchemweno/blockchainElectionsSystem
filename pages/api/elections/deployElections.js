@@ -1,5 +1,5 @@
 import deployContract from "../../../utils/deployContract";
-import {web3} from "../../../constants";
+import {accountIndex, web3} from "../../../constants";
 import User from "../../../models/User";
 import Election from "../../../models/Election";
 import dbConnect from "../../../utils/dbConnect";
@@ -16,7 +16,8 @@ export default async function handler(req, res) {
 
     await dbConnect()
 
-    const { voters, aspirants, year, post} = req.body
+    const { voters, aspirants, year, post, duration} = req.body
+
 
     const electionExists = await Election.findOne({post: req.body.post, year: req.body.year})
 
@@ -35,7 +36,8 @@ export default async function handler(req, res) {
 
     try {
         const contract = await deployContract(
-            aspirants.map(aspirant => web3.utils.toHex(aspirant.email))
+            aspirants.map(aspirant => web3.utils.toHex(aspirant.email)),
+            duration
         )
 
         let processedVoters = [];
@@ -48,7 +50,7 @@ export default async function handler(req, res) {
                 address = await web3.eth.personal.newAccount('test')
                 await web3.eth.personal.unlockAccount(address, 'test', 30000000000000000000000)
                 await contract.methods.addVoter(address, web3.utils.toHex(voter.email)).send({
-                    from: accounts[4]
+                    from: accounts[accountIndex]
                 })
                 processedVoters.push({...voter, address})
             }

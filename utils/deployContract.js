@@ -2,13 +2,13 @@ import Web3 from "web3";
 import {abi, binary, myEther, web3} from "../constants";
 
 
-const deployContract = async (constructorArguments) => {
+const deployContract = async (aspirants, duration) => {
     try {
         const contract = await new web3.eth.Contract(
             abi,
         ).deploy({
             data: '0x' + binary,
-            arguments: [constructorArguments]
+            arguments: [aspirants, (duration * 60 * 60)]
         })
             .send({
                 from: myEther,

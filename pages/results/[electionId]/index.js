@@ -16,19 +16,13 @@ const ResultsDetail = () => {
         toast.loading('Fetching election....')
 
         try {
-            const response = await fetch(
-                'http://127.0.0.1:3000/api/elections/getElectionsById',
-                {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json',
-                        Authorization: `Bearer ${user.token}`
-                    },
-                    body: JSON.stringify({
-                        id: electionId
-                    })
-                }
-            )
+            const response = await fetch('http://127.0.0.1:3000/api/elections/getElectionsById', {
+                method: 'POST', headers: {
+                    'content-type': 'application/json', Authorization: `Bearer ${user.token}`
+                }, body: JSON.stringify({
+                    id: electionId
+                })
+            })
             if (response.status !== 200) throw new Error('Something went wrong')
 
             const resData = await response.json();
@@ -41,47 +35,45 @@ const ResultsDetail = () => {
             toast.error(e.message)
         }
     }, [])
-    return (
-        <Layout>
+    return (<Layout>
             <Toaster/>
-            {election &&
-                <div className={styles.Container}>
-                    <h1>
-                        Election Details
-                    </h1>
-                    <h2>
-                        {election.year} {election.post} Elections
-                    </h2>
-                    <div className={styles.StatusWinner}>
-                        <p><strong>Status:</strong> {election.completed ? '' : 'Not'} Completed</p>
-                        <p><strong>Winner:</strong> {election.completed ? election.winner : 'N/A'} <strong>Winning Votes:</strong> {election.completed ? election.winningVotes : 'N/A'}</p>
+            {election && <div className={styles.Container}>
+                <h1>
+                    Election Details
+                </h1>
+                <h2>
+                    {election.year} {election.post} Elections
+                </h2>
+                <div className={styles.StatusWinner}>
+                    <p><strong>Status:</strong> {election.completed ? '' : 'Not'} Completed</p>
+                    <p><strong>Winner:</strong> {election.completed ? election.winner : 'N/A'} <strong>Winning
+                        Votes:</strong> {election.completed ? election.winningVotes : 'N/A'}</p>
+                </div>
+                <div>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}} className={'w-2/3'}>
+                        <p><strong>Total Voters:</strong> {election.voters.length}</p>
+                        <p><strong>Turnout:</strong> {(election.voted / election.voters.length * 100)}%</p>
                     </div>
-                    <div>
-                        <div style={{display: 'flex', justifyContent: 'space-between'}} className={'w-2/3'}>
-                            <p><strong>Total Voters:</strong> {election.voters.length}</p>
-                            <p><strong>Turnout:</strong> {(election.voted / election.voters.length * 100)}%</p>
-                        </div>
+                    <div style={{display: 'flex', justifyContent: 'space-between'}} className={'w-2/3'}>
                         <p><strong>Total Voted:</strong> {election.voted}</p>
-                    </div>
-                    <h1>Tally:</h1>
-                    <div className={styles.AspirantsContainer}>
-                        {election.aspirants.map((aspirant, index) => {
-                            return (
-                                <div
-                                    key={index}
-                                    className={styles.AspirantContainer}
-                                >
-                                    <p><strong>Name:</strong> {aspirant.firstName} {aspirant.lastName}</p>
-                                    <p><strong>Email:</strong> {aspirant.email}</p>
-                                    <p><strong>Votes:</strong> {aspirant.votes}</p>
-                                </div>
-                            )
-                        })}
+                        <p><strong>Time left:</strong> {election.timeLeft}</p>
                     </div>
                 </div>
-            }
-        </Layout>
-    )
+                <h1>Tally:</h1>
+                <div className={styles.AspirantsContainer}>
+                    {election.aspirants.map((aspirant, index) => {
+                        return (<div
+                                key={index}
+                                className={styles.AspirantContainer}
+                            >
+                                <p><strong>Name:</strong> {aspirant.firstName} {aspirant.lastName}</p>
+                                <p><strong>Email:</strong> {aspirant.email}</p>
+                                <p><strong>Votes:</strong> {aspirant.votes}</p>
+                            </div>)
+                    })}
+                </div>
+            </div>}
+        </Layout>)
 }
 
 

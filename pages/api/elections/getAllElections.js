@@ -1,7 +1,7 @@
 import Election from "../../../models/Election";
 import convertProposalsResponseToJson from "../../../utils/convertProposalsResponseToJson";
 import getContract from "../../../utils/getContract";
-import {web3} from "../../../constants";
+import {accountIndex, web3} from "../../../constants";
 import dbConnect from "../../../utils/dbConnect";
 import middlewareHandler from "../../../utils/middlewareHandler";
 import isAuth from "../../../utils/authUtils/isAuth";
@@ -30,19 +30,22 @@ export default async function handler(req, res) {
 
         for (let election of elections) {
             contract = await getContract(election.contractAddress)
+            await contract.methods.updateTime().send({
+                from: accounts[accountIndex]
+            })
             resProposals = await contract.methods.getAllProposals().call({
-                from: accounts[4]
+                from: accounts[accountIndex]
             })
 
             winningProposal = await contract.methods.winningProposals().call({
-                from: accounts[4]
+                from: accounts[accountIndex]
             })
 
             processedProposals = convertProposalsResponseToJson(resProposals[0], resProposals[1])
 
             for (let voter of election.voters) {
                 const voterDetails = await contract.methods.getAllVoters(voter.address).call({
-                    from: accounts[4]
+                    from: accounts[accountIndex]
                 })
 
                 if (voterDetails['voted__']) voterCount++
@@ -54,6 +57,8 @@ export default async function handler(req, res) {
                 winner: winningProposal['winningVoteCount_'] > 0 ? web3.utils.hexToString(winningProposal['winningName_']) : null,
                 winningVotes: winningProposal['winningVoteCount_'] > 0 ? winningProposal['winningVoteCount_'] : null,
                 voted: voterCount,
+                completed: resProposals[2],
+                timeLeft :  new Date(resProposals[3] * 1000).toISOString().slice(11, 19)
             })
 
             voterCount = 0

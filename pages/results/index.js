@@ -46,6 +46,7 @@ const Results = () => {
         <Layout>
             <Toaster/>
             <div className={styles.Container}>
+                {!elections || elections?.length === 0 ? <p style={{marginLeft: '1rem'}}>No elections available</p> : null}
                 <div>
                     {
                         elections &&

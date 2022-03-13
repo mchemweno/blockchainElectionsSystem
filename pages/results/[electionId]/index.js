@@ -46,8 +46,8 @@ const ResultsDetail = () => {
                 </h2>
                 <div className={styles.StatusWinner}>
                     <p><strong>Status:</strong> {election.completed ? '' : 'Not'} Completed</p>
-                    <p><strong>Winner:</strong> {election.completed ? election.winner : 'N/A'} <strong>Winning
-                        Votes:</strong> {election.completed ? election.winningVotes : 'N/A'}</p>
+                    <p><strong>Winner:</strong> {election.completed ? election.winner : 'N/A'}</p>
+                    <p><strong>Winning Votes:</strong> {election.completed ? election.winningVotes : 'N/A'}</p>
                 </div>
                 <div>
                     <div style={{display: 'flex', justifyContent: 'space-between'}} className={'w-2/3'}>

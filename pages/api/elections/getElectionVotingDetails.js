@@ -65,7 +65,7 @@ export default async function handler(req, res) {
             voted: voterVoted,
             votedFor: votedFor,
             completed: resProposals[2],
-            timeLeft :  new Date(resProposals[3] * 1000).toISOString().slice(11, 19)
+            timeLeft : !voterVoted ? new Date(resProposals[3] * 1000).toISOString().slice(11, 19) : 'You already voted'
         })
     } catch (e) {
         res.status(500).json({message: e.message})

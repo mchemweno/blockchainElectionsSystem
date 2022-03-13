@@ -11,12 +11,13 @@ const AddElections = ({setVisibility, electionDetails, setElectionDetails, ppost
 
     const validationSchema = Yup.object({
         year: Yup.number().integer().required().min(2022).max(2027),
+        duration: Yup.number().integer().required().min(1).max(12),
         post: Yup.string().required().min(5),
     });
 
     const handlerSubmit = async (values, submitProps) => {
         submitProps.setSubmitting(true)
-        const {year, post} = values
+        const {year, post, duration} = values
 
         try {
             const response = await fetch(
@@ -40,7 +41,8 @@ const AddElections = ({setVisibility, electionDetails, setElectionDetails, ppost
 
             setElectionDetails({
                 year: year,
-                post: post
+                post: post,
+                duration: duration
             })
             submitProps.setSubmitting(false);
 
@@ -99,6 +101,24 @@ const AddElections = ({setVisibility, electionDetails, setElectionDetails, ppost
                                         </label>
                                     </div>
                                     <ErrorMessage name="year"/>
+                                </div>
+                                <div className={styles.InputErrorDiv}>
+                                    <div className={styles.FormControl}>
+                                        <Field
+                                            as="input"
+                                            type="number"
+                                            id="duration"
+                                            name="duration"
+                                            required
+                                            autoComplete="off"
+                                        />
+                                        <label htmlFor="number" className={styles.Label}>
+                                        <span className={styles.ContentLabel}>
+                                         duration
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <ErrorMessage name="duration"/>
                                 </div>
                                 <div className={styles.Button}>
                                     <Button

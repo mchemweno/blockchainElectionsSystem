@@ -77,6 +77,7 @@ const ElectionDetails = ({electionDetails, setVoteEvent}) => {
             <div className={styles.header}>
                 <h1>{electionDetails.post} {electionDetails.year} Election</h1>
                 <h2>Aspirants</h2>
+                <p><strong>Time left to vote:</strong> {electionDetails.timeLeft}</p>
             </div>
             <div className={styles.body}>
                 {electionDetails.aspirants.map((_aspirant, index) => {

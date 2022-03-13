@@ -16,8 +16,9 @@ const Index = () => {
     const pposts = ['President', 'IT Representative', 'Sports Representative']
     const [electionDetails, setElectionDetails] = useState({
         'election name': '',
-        year: '',
-        post: pposts[0]
+        year: 2022,
+        post: pposts[0],
+        duration: 1
     })
     const [voters, setVoters] = useState(null)
     const [participants, setParticipants] = useState([])
@@ -43,7 +44,8 @@ const Index = () => {
                         voters,
                         aspirants: participants,
                         post: electionDetails.post,
-                        year: electionDetails.year
+                        year: electionDetails.year,
+                        duration: electionDetails.duration
                     }),
                 }
             )

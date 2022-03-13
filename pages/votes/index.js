@@ -85,7 +85,7 @@ const Votes = () => {
     return (
         <Layout>
             <Toaster/>
-            {elections && <div>
+            {elections && elections.length > 0 ? <div>
                 <div className={styles.selectorContainer}>
                     <div className={styles.radioContainer}>
                         <div className={styles.radioOptions}>
@@ -110,8 +110,9 @@ const Votes = () => {
                         </div>
                     </div>
                 </div>
-            </div>}
-            {electionDetails && <ElectionDetails electionDetails={electionDetails} user={user} setVoteEvent={setVoteEvent}/>}
+            </div> : <p style={{marginLeft: '1rem'}}>No elections available for you to vote</p>}
+            {electionDetails &&
+                <ElectionDetails electionDetails={electionDetails} user={user} setVoteEvent={setVoteEvent}/>}
         </Layout>
     )
 }

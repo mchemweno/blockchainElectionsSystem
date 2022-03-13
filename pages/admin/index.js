@@ -50,6 +50,7 @@ const Admin = () => {
                 <h2>Elections</h2>
                 <Button dark onClick={() => router.push(`${router.route}/addVoters`)}>Deploy Elections</Button>
             </div>
+            {!elections || elections?.length === 0 ? <p style={{marginLeft: '1rem'}}>No elections available</p> : null}
             <div className={styles.Container}>
                 <div>
                     {

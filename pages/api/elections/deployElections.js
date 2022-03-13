@@ -16,7 +16,9 @@ export default async function handler(req, res) {
 
     await dbConnect()
 
-    const { voters, aspirants, year, post, duration} = req.body
+    const {voters, aspirants, year, post, duration} = req.body
+
+    if (!voters || !aspirants || !year || !post || !duration) res.status(405).end(`Please fill all the required fields.`)
 
 
     const electionExists = await Election.findOne({post: req.body.post, year: req.body.year})

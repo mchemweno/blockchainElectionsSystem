@@ -8,7 +8,7 @@ const deployContract = async (aspirants, duration) => {
             abi,
         ).deploy({
             data: '0x' + binary,
-            arguments: [aspirants, (duration * 60 * 60)]
+            arguments: [aspirants, (+duration * 60 * 60)]
         })
             .send({
                 from: myEther,

@@ -15,7 +15,7 @@ const isAuth = (req, res, next) => {
     }
     let authToken
     if (authorization) {
-      ;[, authToken] = authorization.split(' ')
+      [, authToken] = authorization.split(' ')
     }
 
     if (token) {

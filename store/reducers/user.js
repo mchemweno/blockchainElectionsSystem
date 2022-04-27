@@ -9,16 +9,18 @@ const initialState = {
     admin: null,
     id: null,
     username: null,
+    token: null
 }
 
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN:
+            console.log(action.token)
             return {
                 ...state,
                 ...action.user,
-                ...action.token,
+                token: action.token,
                 isLoggedIn: true
             }
         case AUTO_LOGIN:

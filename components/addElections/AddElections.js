@@ -96,7 +96,7 @@ const AddElections = ({setVisibility, electionDetails, setElectionDetails, ppost
                                         />
                                         <label htmlFor="number" className={styles.Label}>
                                         <span className={styles.ContentLabel}>
-                                         Year
+                                         Year:
                                             </span>
                                         </label>
                                     </div>
@@ -114,7 +114,7 @@ const AddElections = ({setVisibility, electionDetails, setElectionDetails, ppost
                                         />
                                         <label htmlFor="number" className={styles.Label}>
                                         <span className={styles.ContentLabel}>
-                                         duration
+                                         duration (hours):
                                             </span>
                                         </label>
                                     </div>

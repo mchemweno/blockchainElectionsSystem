@@ -8,7 +8,6 @@ import middlewareHandler from "../../../utils/middlewareHandler";
 import isAuth from "../../../utils/authUtils/isAuth";
 
 export default async function handler(req, res) {
-
     if (req.method !== 'POST') {
         return res.status(405).end(`Method ${req.method} Not Allowed`)
     }
